@@ -7,6 +7,10 @@
 <title>Students CRUD App</title>
 </head>
 <body>
-	<h1>Welcome to crud app</h1>
+<center>
+<h1>Welcome to crud app</h1>
+</center>
+Executable Jar File
+	hibernate-core-5.4.10.Final.jar
 </body>
 </html>
