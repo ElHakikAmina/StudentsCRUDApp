@@ -25,7 +25,22 @@ public class WelcomeController {
 		return "view/student_add_form.jsp";
 	}
 	
-	@RequestMapping
+	@RequestMapping(value="add_student_action",method = RequestMethod.POST)
+	public void assStudent(HttpServletResponse res,
+			@ModulAttribute("student") Student std
+			) throws IOException
+	{
+		System.out.println(std.getName());
+		
+		Session session = null;
+		session = HibernateDatabaseConnection.getSessionFactory().openSession();
+		
+		Transaction t = session.beginTransaction();
+		session.save(std);
+		t.commit();
+		
+		res.sendRedirect("dashboard");
+	}
 	
 	
 	
