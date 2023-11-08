@@ -23,12 +23,37 @@ public class HibernateDatabaseConnection {
 						new StandardServiceRegisteryBuilder();
 				
 				
-				Map settings = new HashMap<>();				
+				Map settings = new HashMap<>();
+				settings.put("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
+				settings.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/crudapp");
+				settings.put("hibernate.connection.username", "root");
+				settings.put("hibernate.connection.password", "1234");
+				settings.put("hibernate.show_sql", "true");
+				settings.put("hibernate.hdm2.auto","update");
+				
+				registryBuiler.applySettings(settings);
+				
+				registry = registryBuilder.build();
+				
+				Metadata metadata = sources.getMetadataBuilder().build();
+				
+				sessionFactory = metadata.getSessionFactoryBuilder().build();
 			}catch(Esception e)
 			{
-				
+				System.out.println("SessionFactory creation failed");
+				if(registry != null) {
+					StandardServiceRegistryBuilder.destroy(registry);
+				}
 			}
 		}
+		return sessionFactory;
+	}
+	public statis void shutdown() {
+		if(regidtry != null)
+		{
+			StandardServiceRegistryBuilder.destroy(registry);
+		}
+	}
 	}
 	
 	
